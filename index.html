@@ -454,12 +454,16 @@
               </div>
 
               <div class="input-row">
-                <div class="fake-input">Skriv et spørsmål til AI-servitøren …</div>
-                <button class="send-btn" aria-label="Send">
-                  ➤
-                </button>
-              </div>
-            </div>
+  <input
+    id="userInput"
+    class="fake-input"
+    placeholder="Skriv et spørsmål til AI-servitøren …"
+  />
+  <button class="send-btn" id="sendBtn" aria-label="Send">
+    ➤
+  </button>
+</div>
+
 
             <p class="footnote">
               Dette er en enkel demo. I en ekte pilot kobler vi AI-servitøren til deres meny, åpningstider og kanaler.
@@ -471,43 +475,85 @@
   </main>
 
   <script>
-    // Scroll to demo on button click
-    document.getElementById("scrollToDemo")?.addEventListener("click", () => {
-      document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" });
+  // Scroll til demo
+  document.getElementById("scrollToDemo")?.addEventListener("click", () => {
+    document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" });
+  });
+
+  const API_BASE = "https://ai-servitor-api.railway.app/"; 
+
+  const chatScroll = document.getElementById("chatScroll");
+  const chips = document.querySelectorAll(".chip");
+  const inputEl = document.getElementById("userInput");
+  const sendBtn = document.getElementById("sendBtn");
+
+  function addMessage(text, type) {
+    const el = document.createElement("div");
+    el.className = "msg " + type;
+    el.textContent = text;
+    chatScroll.appendChild(el);
+    chatScroll.scrollTop = chatScroll.scrollHeight;
+    return el;
+  }
+
+  async function sendToApi(text) {
+    const res = await fetch(API_BASE + "/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: text }),
     });
 
-    // Simple scripted replies for the chips
-    const chatScroll = document.getElementById("chatScroll");
-    const chips = document.querySelectorAll(".chip");
-
-    const replies = {
-      meny:
-        "Her er et eksempel: AI-servitøren kan lenke til menyen deres og foreslå populære retter. For eksempel: «Dagens anbefaling er vår butter chicken og husets vegetarlasagne.»",
-      apentider:
-        "AI-servitøren svarer automatisk på åpningstider, også i høytider og ferier – basert på informasjon dere legger inn én gang.",
-      allergi:
-        "Vi kan lære inn hvilke retter som er glutenfrie, laktosefrie osv., slik at gjester raskt får trygge anbefalinger."
-    };
-
-    function addMessage(text, type) {
-      const el = document.createElement("div");
-      el.className = "msg " + type;
-      el.textContent = text;
-      chatScroll.appendChild(el);
-      chatScroll.scrollTop = chatScroll.scrollHeight;
+    if (!res.ok) {
+      throw new Error("API error: " + res.status);
     }
 
-    chips.forEach((chip) => {
-      chip.addEventListener("click", () => {
-        const key = chip.dataset.demo;
-        if (!key || !replies[key]) return;
-        addMessage(chip.textContent, "user");
-        setTimeout(() => {
-          addMessage(replies[key], "bot");
-        }, 400);
-      });
+    const data = await res.json();
+    return data.reply;
+  }
+
+  async function handleUserMessage(text) {
+    if (!text || !text.trim()) return;
+
+    // Vis bruker-melding
+    addMessage(text.trim(), "user");
+
+    // Vis "skriver…"
+    const loading = addMessage("Skriver …", "bot");
+
+    try {
+      const reply = await sendToApi(text.trim());
+      loading.textContent = reply;
+    } catch (err) {
+      console.error(err);
+      loading.textContent =
+        "Beklager, noe gikk galt med serveren. Prøv igjen litt senere.";
+    }
+  }
+
+  // Chips klikker
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      handleUserMessage(chip.textContent || "");
     });
-  </script>
+  });
+
+  // Send-knapp
+  sendBtn?.addEventListener("click", () => {
+    const text = inputEl.value;
+    inputEl.value = "";
+    handleUserMessage(text);
+  });
+
+  // Enter-tast i input
+  inputEl?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const text = inputEl.value;
+      inputEl.value = "";
+      handleUserMessage(text);
+    }
+  });
+</script>
+
 </body>
 </html>
 
