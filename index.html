@@ -531,11 +531,19 @@
   }
 
   // Chips klikker
-  chips.forEach((chip) => {
-    chip.addEventListener("click", () => {
-      handleUserMessage(chip.textContent || "");
-    });
+chips.forEach(chip => {
+  chip.addEventListener("click", () => {
+    let text = chip.textContent || "";
+
+    // Demo-boost: gi AI-en litt kontekst
+    if (text.toLowerCase().includes("meny")) {
+      text = "Kan du vise et eksempel på hvordan menyen kan se ut i denne demoen? Bruk noen typiske restaurantretter.";
+    }
+
+    handleUserMessage(text);
   });
+});
+
 
   // Send-knapp
   sendBtn?.addEventListener("click", () => {
