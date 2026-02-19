@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI-servitør – enkel demo</title>
+  <title>AI-servitør – Bordreservasjon og spørsmål</title>
   <style>
     :root {
       --bg: #0f172a;
@@ -428,8 +428,9 @@
             <header class="chat-header">
               <div class="avatar">K</div>
               <div class="chat-header-text">
-                <div class="chat-title">AI-servitør · Demo</div>
-                <div class="chat-sub">Svar på vanlige spørsmål for restauranten</div>
+                <div class="chat-title">AI-servitør</div>
+                <div class="chat-sub">Reservasjon · meny · allergier · åpningstider</div>
+
               </div>
             </header>
 
@@ -448,10 +449,13 @@
               </div>
 
               <div class="chips">
-                <button class="chip" data-demo="meny">Har dere takeaway?</button>
-                <button class="chip" data-demo="apentider">Hva er åpningstidene deres?</button>
-                <button class="chip" data-demo="allergi">Har dere glutenfrie alternativer?</button>
+              <button class="chip" data-demo="reserve">Reserver bord</button>
+              <button class="chip" data-demo="meny">Se meny og anbefaling</button>
+              <button class="chip" data-demo="allergi">Allergier og tilpasning</button>
+              <button class="chip" data-demo="apentider">Åpningstider</button>
+              <button class="chip" data-demo="kontakt">Kontakt og adresse</button>
               </div>
+
 
               <div class="input-row">
   <input
@@ -466,8 +470,10 @@
 
 
             <p class="footnote">
-              Dette er en enkel demo. I en ekte pilot kobler vi AI-servitøren til deres meny, åpningstider og kanaler.
+            Jeg kan hjelpe med reservasjon, menyspørsmål, allergier og åpningstider.
+            Endelig booking bekreftes alltid manuelt av restauranten.
             </p>
+
           </div>
         </div>
       </div>
@@ -533,16 +539,20 @@
   // Chips klikker
 chips.forEach(chip => {
   chip.addEventListener("click", () => {
-    let text = chip.textContent || "";
+    const key = chip.dataset.demo;
 
-    // Demo-boost: gi AI-en litt kontekst
-    if (text.toLowerCase().includes("meny")) {
-      text = "Kan du vise et eksempel på hvordan menyen kan se ut i denne demoen? Bruk noen typiske restaurantretter.";
-    }
+    const prompts = {
+      reserve: "Jeg vil reservere bord. Hvilke detaljer trenger du av meg?",
+      meny: "Hva anbefaler du fra menyen? Spør meg om preferanser (kjøtt/fisk/veg), allergier og budsjett.",
+      allergi: "Jeg har allergier. Hvilke spørsmål bør du stille for å gi trygge anbefalinger?",
+      apentider: "Hva er åpningstidene i dag, og når er kjøkkenet åpent?",
+      kontakt: "Hvor ligger dere, og hvordan kontakter jeg dere? Be om postnummer/bydel hvis du må."
+    };
 
-    handleUserMessage(text);
+    handleUserMessage(prompts[key] || chip.textContent || "");
   });
 });
+
 
 
   // Send-knapp
