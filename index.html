@@ -183,122 +183,10 @@
     }
 
     /* Chat / phone mockup */
-    /* Chat panel (pro) */
-
-    .chat-panel{
-      border-radius: 24px;
-      background: rgba(2, 6, 23, 0.75);
-      border: 1px solid rgba(148, 163, 184, 0.22);
-      box-shadow: 0 22px 60px rgba(0,0,0,0.55);
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 560px;
-      margin: 0 auto;
-    }
-
-    .chat-window {
-      height: 70vh;
-      min-height: 640px;
-      max-height: 820px;
-      padding: 14px;
-      border-radius: 18px;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      background: rgba(2, 6, 23, 0.9);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      font-size: 15px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .chat-scroll {
-      overflow-y: auto;
-      padding-right: 8px;
-      padding-bottom: 14px;
-    }
-
-    .msg {
-      max-width: 86%;
-      padding: 12px 14px;
-      border-radius: 16px;
-      line-height: 1.6;
-      margin-bottom: 8px;
-      word-wrap: break-word;
-    }
-
-    .chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top: 4px;
-    }
-
-    .chip{
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 12px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(75, 85, 99, 0.9);
-      color: var(--muted);
-      cursor: pointer;
-    }
-
-    .chip:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .input-row{
-      display:flex;
-      gap:10px;
-      align-items:flex-end;
-      margin-top: 6px;
-    }
-
-    .input{
-      flex:1;
-      resize:none;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.95);
-      color: var(--text);
-      font-size: 14px;
-      line-height: 1.5;
-      min-height: 44px;
-      max-height: 140px;
-      outline: none;
-    }
-
-    .send-btn{
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      border: none;
-      background: var(--accent);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size: 16px;
-      cursor:pointer;
-      flex-shrink: 0;
-    }
-
-    .footnote{
-      text-align:left;
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    /* Legacy phone mockup (not used) */
 
     .phone {
       width: 100%;
-      max-width: 380px;
+      max-width: 420px;
       margin-left: auto;
       margin-right: auto;
       border-radius: 32px;
@@ -367,93 +255,129 @@
       color: var(--muted);
     }
 
-    /* Mobile: fullskjerm chat (produkt først) */
-    @media (max-width: 768px) {
-
-      body {
-        padding: 0;
-      }
-
-      .card {
-        grid-template-columns: 1fr;
-        padding: 0;
-        gap: 0;
-        border-radius: 0;
-        border: none;
-        box-shadow: none;
-      }
-
-      /* Skjul pitch på mobil – produktet skal dominere */
-      .card > div:first-child {
-        display: none;
-      }
-
-      .chat-panel {
-        max-width: 100%;
-        width: 100%;
-        height: 100vh;
-        border-radius: 0;
-        padding: 16px;
-      }
-
-      /* Header tar litt plass, resten går til chat */
-      .chat-window {
-        height: calc(100vh - 120px);
-        min-height: auto;
-        max-height: none;
-        padding: 12px;
-        font-size: 16px;
-      }
-
-      .chat-scroll{
-        padding-bottom: 18px;
-      }
-
-      .msg {
-        max-width: 94%;
-        padding: 14px 16px;
-        font-size: 16px;
-        line-height: 1.6;
-      }
-
-      /* Chips: horisontal scroll */
-      .chips{
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 8px;
-      }
-
-      .chip{
-        white-space: nowrap;
-        padding: 9px 12px;
-        font-size: 13px;
-      }
-
-      .input-row {
-        position: sticky;
-        bottom: 0;
-        background: rgba(2, 6, 23, 0.95);
-        padding-top: 10px;
-      }
-
-      .input {
-        font-size: 16px; /* hindrer iOS zoom */
-        min-height: 52px;
-      }
-
-      .send-btn {
-        width: 52px;
-        height: 52px;
-      }
+    .chat-window {
+      background: radial-gradient(circle at top left, #020617 0, #020617 60%, #020617 100%);
+      border-radius: 18px;
+      padding: 10px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 14px;
+      height: 380px;
+      overflow: hidden;
+      position: relative;
     }
 
-p.lead { font-size: 14px; }
+    .chat-scroll {
+      overflow-y: auto;
+      padding-right: 4px;
+    }
 
-      .chat-window {
-        height: 68vh;
-        min-height: 380px;
-      }
+    .msg {
+      max-width: 92%;
+      padding: 12px 14px;
+      border-radius: 16px;
+      line-height: 1.6;
+      margin-bottom: 4px;
+      word-wrap: break-word;
+    }
+
+    .msg.user {
+      align-self: flex-end;
+      background: var(--bubble-user);
+      border-bottom-right-radius: 4px;
+    }
+
+    .msg.bot {
+      align-self: flex-start;
+      background: var(--bubble-bot);
+      border-bottom-left-radius: 4px;
+      border: 1px solid rgba(55, 65, 81, 0.8);
+    }
+
+    .msg.bot strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .input-row {
+      margin-top: auto;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .fake-input {
+      flex: 1;
+      border-radius: 14px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      padding: 12px 14px;
+      font-size: 14px;
+      color: var(--muted);
+    
+      resize: none;
+      min-height: 44px;
+      max-height: 140px;
+      line-height: 1.5;
+    }
+.send-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .footnote {
+      text-align: left;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* Mobil: større chat uten horisontal stretching */
+    @media (max-width: 768px) {
+      body { padding: 16px; overflow-x: hidden; }
+      .page { max-width: 100%; }
+      .card { padding: 16px; }
+      .phone { max-width: 100%; }
+      .chat-window { height: 58vh; min-height: 420px; }
+      .chips { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+      .chip { white-space: nowrap; }
+      .fake-input { font-size: 16px; } /* hindrer iOS zoom */
+    }
+
+    @media (max-width: 420px) {
+      .chat-window { height: 62vh; min-height: 380px; }
     }
 
   </style>
@@ -519,51 +443,16 @@ p.lead { font-size: 14px; }
 
       <!-- Right: phone / chat -->
       <div id="demo">
-        
-        <div class="chat-panel">
-          <header class="chat-header">
-            <div class="avatar">K</div>
-            <div class="chat-header-text">
-              <div class="chat-title">AI-servitør</div>
-              <div class="chat-sub">Reservasjon · meny · allergier · åpningstider</div>
-            </div>
-          </header>
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-inner">
+            <header class="chat-header">
+              <div class="avatar">K</div>
+              <div class="chat-header-text">
+                <div class="chat-title">AI-servitør</div>
+                <div class="chat-sub">Reservasjon · meny · allergier · åpningstider</div>
 
-          <div class="chat-window">
-            <div id="chatScroll" class="chat-scroll">
-              <div class="msg user">Hei, har dere bord i kveld?</div>
-              <div class="msg bot">
-                Hei! <strong>Ja, vi har ledige bord</strong> i kveld.
-                Hvilken tid ønsker du å komme, og hvor mange personer er dere?
               </div>
-              <div class="msg user">Vi er 4 personer, rundt klokken 19.</div>
-              <div class="msg bot">
-                Det går fint! Jeg kan holde av bord til kl. 19:00 for 4 personer.
-                Vil du se menyen før dere kommer?
-              </div>
-            </div>
-
-            <div class="chips">
-              <button class="chip" data-demo="reserve">Reserver bord</button>
-              <button class="chip" data-demo="meny">Se meny og anbefaling</button>
-              <button class="chip" data-demo="allergi">Allergier og tilpasning</button>
-              <button class="chip" data-demo="apentider">Åpningstider</button>
-              <button class="chip" data-demo="kontakt">Kontakt og adresse</button>
-            </div>
-
-            <div class="input-row">
-              <textarea id="userInput" class="input" rows="1" placeholder="Skriv et spørsmål til AI-servitøren …"></textarea>
-              <button class="send-btn" id="sendBtn" aria-label="Send">➤</button>
-            </div>
-
-            <p class="footnote">
-              Jeg kan hjelpe med reservasjon, menyspørsmål, allergier og åpningstider.
-              Endelig booking bekreftes alltid manuelt av restauranten.
-            </p>
-          </div>
-        </div>
-
-      </div>
             </header>
 
             <div class="chat-window">
@@ -590,11 +479,10 @@ p.lead { font-size: 14px; }
 
 
               <div class="input-row">
-  <input
-    id="userInput"
+  <textarea id="userInput"
     class="fake-input"
     placeholder="Skriv et spørsmål til AI-servitøren …"
-  />
+  / rows="1"></textarea>
   <button class="send-btn" id="sendBtn" aria-label="Send">
     ➤
   </button>
@@ -612,7 +500,11 @@ p.lead { font-size: 14px; }
     </section>
   </main>
 
-  <script>  });
+  <script>
+  // Scroll til demo
+  document.getElementById("scrollToDemo")?.addEventListener("click", () => {
+    document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" });
+  });
 
   const API_BASE = "https://ai-servitor-crewai-production.up.railway.app";
 
