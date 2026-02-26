@@ -328,11 +328,19 @@ function addMessage(text, type) {
   return bubble;
 }
 
+  // Stabil session per bruker (lagres i nettleser)
+const SESSION_ID_KEY = "ai_servitor_session_id";
+let sessionId = localStorage.getItem(SESSION_ID_KEY);
+if (!sessionId) {
+  sessionId = crypto.randomUUID();
+  localStorage.setItem(SESSION_ID_KEY, sessionId);
+}
+  
 async function sendToApi(text) {
   const res = await fetch(API_BASE + "/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message: text })
+    body: JSON.stringify({ session_id: sessionId, message: text }),
   });
 
   if (!res.ok) throw new Error("API error: " + res.status);
